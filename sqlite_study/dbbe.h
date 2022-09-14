@@ -7,7 +7,7 @@ typedef struct Dbbe Dbbe;
 ** The complete database is an instance of the following structure.
 */
 struct Dbbe {
-    //char* zDir;        /* The directory containing the database */
+    char* zDir;        /* The directory containing the database */
     //int write;         /* True for write permission */
     //BeFile* pOpen;     /* List of open files */
     //int nTemp;         /* Number of temporary files created */

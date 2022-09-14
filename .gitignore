@@ -53,4 +53,5 @@ dkms.conf
 .vs
 *.vcxproj
 *.filters
-*.user
+*.user 
+x64

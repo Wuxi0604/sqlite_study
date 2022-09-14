@@ -1,6 +1,7 @@
 #ifndef SQLITE_H
 #define SQLITE_H
-   
+  
+#include <stdio.h>
 #include "dbbe.h"
 
 #define N_HASH        51
@@ -8,6 +9,8 @@
 /*
 ** Forward references to structures
 */
+typedef struct sqlite sqlite;
+
 typedef struct Column Column;
 typedef struct Table Table;
 typedef struct Index Index;
@@ -66,6 +69,24 @@ struct Index {
     Table* pTable;   /* The SQL table being indexed */
     int isUnique;    /* True if keys must all be unique */
     Index* pNext;    /* The next index associated with the same table */
+};
+
+/*
+** An pointer to an instance of this structure is passed from
+** the main program to the callback.  This is used to communicate
+** state and mode information.
+*/
+struct callback_data {
+    sqlite* db;            /* The database */
+    int cnt;               /* Number of records displayed so far */
+    FILE* out;             /* Write results here */
+    int mode;              /* An output mode setting */
+    int showHeader;        /* True to show column names in List or Column mode */
+    int escape;            /* Escape this character when in MODE_List */
+    char zDestTable[250];  /* Name of destination table when MODE_Insert */
+    char separator[20];    /* Separator character for MODE_List */
+    int colWidth[100];     /* Requested width of each column when in column mode*/
+    int actualWidth[100];  /* Actual width of each column */
 };
 
 #endif // !SQLITE_H
